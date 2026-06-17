@@ -194,21 +194,6 @@ main,.nav,.scroll-progress,.footer,.dock{position:relative;z-index:1}
 .channel__ic{flex:none;display:grid;place-items:center;width:30px;height:30px;border-radius:8px;background:rgba(255,255,255,.06)}
 .channel__ic svg{width:20px;height:20px;display:block}
 
-/* ===== Platform orbit ===== */
-.orbit{--size:clamp(290px,40vw,440px);--r:calc(var(--size)/2);position:relative;width:var(--size);height:var(--size);margin:2.8rem auto .5rem}
-.orbit__ring{position:absolute;inset:0;border-radius:50%;border:1px solid var(--hairline);background:radial-gradient(circle at 50% 50%,transparent 58%,rgba(129,140,248,.06) 72%,transparent 80%)}
-.orbit__ring--inner{inset:18%;border-style:dashed;border-color:rgba(255,255,255,.06);background:none;animation:spin 60s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.orbit__center{position:absolute;inset:0;display:grid;place-content:center;text-align:center;gap:.2rem}
-.orbit__deg{font-size:clamp(2rem,5vw,2.9rem);font-weight:700;letter-spacing:-.03em;line-height:1;background:linear-gradient(120deg,#fff,#C7BFFF 60%,#22D3EE);-webkit-background-clip:text;background-clip:text;color:transparent}
-.orbit__lbl{font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-dim)}
-.orbit__node{position:absolute;top:50%;left:50%;width:0;height:0;transform:rotate(var(--a)) translateY(calc(-1 * var(--r))) rotate(calc(-1 * var(--a)))}
-.orbit__ic{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);display:grid;place-items:center;width:clamp(44px,11vw,56px);height:clamp(44px,11vw,56px);border-radius:15px;background:#0d0f17;border:1px solid var(--hairline);box-shadow:0 10px 28px -12px rgba(0,0,0,.85),0 0 0 5px rgba(8,9,13,.9);transition:transform .3s var(--spring),border-color .3s var(--ease),box-shadow .3s var(--ease);cursor:default}
-.orbit__ic svg{width:58%;height:58%;display:block}
-.orbit__node:hover .orbit__ic{transform:translate(-50%,-50%) scale(1.16);border-color:rgba(129,140,248,.6);box-shadow:0 14px 34px -10px rgba(0,0,0,.9),0 0 22px -4px rgba(129,140,248,.5),0 0 0 5px rgba(8,9,13,.9)}
-.orbit__node::after{content:attr(data-tip);position:absolute;top:50%;left:50%;transform:translate(-50%,calc(-50% + clamp(34px,8vw,42px)));font-family:var(--mono);font-size:.66rem;letter-spacing:.02em;color:var(--ink-dim);white-space:nowrap;opacity:0;transition:opacity .25s var(--ease);pointer-events:none}
-.orbit__node:hover::after{opacity:1;color:var(--ink)}
-
 /* ===== Bento platform badge ===== */
 .bento__badge{position:absolute;top:1.3rem;right:1.3rem;display:grid;place-items:center;width:34px;height:34px;border-radius:9px;background:rgba(255,255,255,.05);border:1px solid var(--hairline-soft);z-index:2}
 .bento__badge svg{width:22px;height:22px;display:block}
@@ -337,70 +322,6 @@ main,.nav,.scroll-progress,.footer,.dock{position:relative;z-index:1}
 .reveal.is-in{opacity:1;transform:none;filter:none}
 .hero__title .line{transform:translateY(102%);opacity:0;transition:opacity .9s var(--ease-out),transform 1s var(--ease-out)}
 .hero__title .line.is-in{transform:none;opacity:1}
-
-/* ===== Showcase sections (clients / study / colleges) ===== */
-.showcase{padding-block:clamp(3.5rem,7vh,6rem)}
-.showcase--study,.showcase--colleges{padding-top:clamp(1rem,2vh,2rem)}
-.section__sub{margin-top:1rem;max-width:44rem;color:var(--ink-dim);font-size:1.02rem;line-height:1.6}
-.section__sub strong{color:var(--ink);font-weight:600}
-.section__sub .count{color:var(--ink);font-weight:700;font-variant-numeric:tabular-nums}
-
-/* logo / monogram tile shared */
-.is-mono{display:grid!important;place-items:center;font-family:var(--mono);font-weight:600;color:#06070b;background:linear-gradient(125deg,#22D3EE,#818CF8)!important;letter-spacing:.01em}
-
-/* Section 1 — client cards */
-.client-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1rem;margin-top:2.2rem}
-.client-card{display:flex;align-items:center;gap:1rem;padding:1.05rem 1.2rem;border-radius:18px;background:var(--glass);border:1px solid var(--hairline);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:border-color .3s var(--ease),box-shadow .35s var(--ease),transform .35s var(--spring);will-change:transform}
-.client-card:hover{border-color:rgba(255,255,255,.2);box-shadow:0 18px 50px -22px rgba(0,0,0,.75)}
-.client-card__logo{flex:none;width:54px;height:54px;border-radius:13px;background:#fff;display:grid;place-items:center;overflow:hidden;padding:7px;box-shadow:0 6px 18px -8px rgba(0,0,0,.6)}
-.client-card__logo img{width:100%;height:100%;object-fit:contain;display:block}
-.client-card__logo.is-mono{padding:0;font-size:1.1rem}
-.client-card__meta{display:flex;flex-direction:column;gap:.25rem;min-width:0}
-.client-card__name{font-weight:600;font-size:1.02rem;letter-spacing:-.01em;color:var(--ink);line-height:1.2}
-.client-card__tag{font-family:var(--mono);font-size:.68rem;letter-spacing:.04em;color:var(--violet);opacity:.85}
-
-/* Section 2 — logo chips grid */
-.logo-grid{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:2rem}
-.lchip{display:inline-flex;align-items:center;gap:.6rem;padding:.45rem .95rem .45rem .45rem;border-radius:999px;background:var(--glass);border:1px solid var(--hairline);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:color .3s var(--ease),border-color .3s var(--ease),transform .3s var(--spring),box-shadow .3s var(--ease);white-space:nowrap}
-.lchip:hover{border-color:rgba(255,255,255,.2);transform:translateY(-3px);box-shadow:0 12px 30px -14px rgba(0,0,0,.65)}
-.lchip__logo{flex:none;width:32px;height:32px;border-radius:8px;background:#fff;display:grid;place-items:center;overflow:hidden;padding:4px;box-shadow:0 3px 12px -5px rgba(0,0,0,.55)}
-.lchip__logo img{width:100%;height:100%;object-fit:contain;display:block}
-.lchip__logo.is-mono{padding:0;font-size:.62rem}
-.lchip__name{font-size:.92rem;font-weight:500;color:var(--ink-dim);letter-spacing:-.01em}
-.lchip:hover .lchip__name{color:var(--ink)}
-.lchip--sm{padding:.4rem .85rem .4rem .4rem}
-.lchip--sm .lchip__logo{width:28px;height:28px;border-radius:7px}
-.lchip--sm .lchip__name{font-size:.85rem}
-
-/* Section 3 — multi-row college marquee */
-.college-rows{margin-top:2rem;display:flex;flex-direction:column;gap:.9rem}
-.college-rows .marquee{margin-top:0}
-.college-rows .marquee__track{gap:.9rem;padding-right:.9rem}
-.marquee--rev .marquee__track{animation-direction:reverse}
-
-/* 360° clients — full cards in a sliding marquee (same logo size/design) */
-.showcase--clients .college-rows{margin-top:2.2rem}
-.showcase--clients .marquee__track{gap:1rem;padding-right:1rem}
-.college-rows .client-card{flex:none;width:clamp(250px,24vw,290px)}
-
-/* colleges — logo-only tiles (no name) */
-.lchip--logo{padding:.5rem;border-radius:14px;gap:0}
-.lchip--logo .lchip__logo{width:46px;height:46px;border-radius:11px}
-
-/* client-card entrance (staggered) + lift */
-.client-card.reveal{opacity:0;transform:translateY(42px) scale(.93);filter:blur(8px)}
-.client-card.reveal.is-in{opacity:1;transform:none;filter:none}
-@media (hover:hover){.client-card:hover{transform:translateY(-5px)}}
-
-/* social profile buttons (contact + footer) */
-.socials{display:flex;gap:.7rem;margin-top:1.4rem;justify-content:center}
-.social{display:grid;place-items:center;width:46px;height:46px;border-radius:13px;background:var(--glass);border:1px solid var(--hairline);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:transform .3s var(--spring),border-color .3s var(--ease),box-shadow .3s var(--ease)}
-.social svg{width:24px;height:24px;display:block}
-.social:hover{transform:translateY(-4px) scale(1.06);border-color:rgba(255,255,255,.22);box-shadow:0 14px 32px -12px rgba(0,0,0,.7),0 0 20px -6px rgba(129,140,248,.45)}
-.footer__socials{display:inline-flex;gap:.9rem;align-items:center}
-.footer__socials a{color:var(--ink-dim);display:grid;place-items:center;transition:color .25s var(--ease),transform .25s var(--spring)}
-.footer__socials a:hover{color:var(--ink);transform:translateY(-2px)}
-.footer__socials svg{width:20px;height:20px;display:block}
 
 /* ===== Responsive ===== */
 @media (max-width:1000px){
