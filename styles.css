@@ -383,10 +383,6 @@ main,.nav,.scroll-progress,.footer,.dock{position:relative;z-index:1}
 .showcase--clients .marquee__track{gap:1rem;padding-right:1rem}
 .college-rows .client-card{flex:none;width:clamp(250px,24vw,290px)}
 
-/* colleges — logo-only tiles (no name) */
-.lchip--logo{padding:.5rem;border-radius:14px;gap:0}
-.lchip--logo .lchip__logo{width:46px;height:46px;border-radius:11px}
-
 /* client-card entrance (staggered) + lift */
 .client-card.reveal{opacity:0;transform:translateY(42px) scale(.93);filter:blur(8px)}
 .client-card.reveal.is-in{opacity:1;transform:none;filter:none}

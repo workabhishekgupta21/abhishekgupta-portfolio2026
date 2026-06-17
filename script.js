@@ -34,12 +34,6 @@
       chip.appendChild(mk('span', 'lchip__name', item.name));
       return chip;
     }
-    // Logo-only chip (no name) — for colleges
-    function logoChip(item, mods) {
-      const chip = mk('span', 'lchip lchip--logo' + (mods || ''));
-      chip.appendChild(logoTile('lchip__logo', item.logo, item.abbr, item.name));
-      return chip;
-    }
     // Full client card (big logo + name + tag) — for the 360° clients marquee
     function clientCard(item) {
       const card = mk('div', 'client-card');
@@ -76,9 +70,9 @@
     const sg = $('[data-grid="study"]');
     if (sg) buildMarquee(sg, PD.study, 2, 2.6, '');
 
-    // Section 3 — colleges (logo-only, real logos only, slow marquee, 4 rows)
+    // Section 3 — colleges (logo + name, real logos only, slow marquee, 4 rows)
     const cm = $('[data-grid="colleges"]');
-    if (cm) buildMarquee(cm, PD.colleges.filter((c) => c.logo), 4, 3.0, '', logoChip);
+    if (cm) buildMarquee(cm, PD.colleges.filter((c) => c.logo), 4, 3.0, ' lchip--sm');
   })();
 
   /* ---------- Loading screen ---------- */
