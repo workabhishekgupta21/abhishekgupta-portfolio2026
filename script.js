@@ -70,9 +70,36 @@
     const sg = $('[data-grid="study"]');
     if (sg) buildMarquee(sg, PD.study, 2, 2.6, '');
 
-    // Section 3 — colleges (logo + name, real logos only, slow marquee, 4 rows)
+    // Section 3 — colleges: only the Top 20 on the homepage (bigger chips, 2 rows).
+    // The full 307-college list lives on the dedicated /colleges page.
     const cm = $('[data-grid="colleges"]');
-    if (cm) buildMarquee(cm, PD.colleges.filter((c) => c.logo), 4, 3.0, ' lchip--sm');
+    const topColleges = (PD.collegesTop && PD.collegesTop.length)
+      ? PD.collegesTop
+      : PD.colleges.filter((c) => c.logo).slice(0, 20);
+    if (cm) buildMarquee(cm, topColleges, 2, 3.6, ' lchip--lg');
+
+    // Tools stack — static wrap grid (favicon + monogram fallback)
+    const TOOLS = [
+      { name: 'Meta Ads', logo: 'assets/logos/tools/meta.svg', abbr: 'M' },
+      { name: 'Google Ads', logo: 'assets/logos/tools/googleads.svg', abbr: 'GA' },
+      { name: 'Google Analytics 4', logo: 'assets/logos/tools/ga4.svg', abbr: 'GA4' },
+      { name: 'Google Tag Manager', logo: 'assets/logos/tools/gtm.svg', abbr: 'GTM' },
+      { name: 'Looker Studio', logo: 'assets/logos/tools/looker.svg', abbr: 'LS' },
+      { name: 'Supermetrics', domain: 'supermetrics.com', abbr: 'SM' },
+      { name: 'Zapier', logo: 'assets/logos/tools/zapier.svg', abbr: 'Z' },
+      { name: 'Maglo CRM', logo: 'assets/logos/maglo.webp', abbr: 'MG' },
+      { name: 'Claude AI', logo: 'assets/logos/tools/claude.svg', abbr: 'C' },
+      { name: 'ChatGPT', logo: 'assets/logos/tools/openai.svg', abbr: 'GP' },
+      { name: 'Google Sheets', logo: 'assets/logos/tools/sheets.svg', abbr: 'GS' }
+    ];
+    const tg = $('[data-grid="tools"]');
+    if (tg) TOOLS.forEach((t, i) => {
+      const card = mk('div', 'tool'); card.setAttribute('data-tilt', '');
+      const src = t.domain ? ('https://www.google.com/s2/favicons?domain=' + t.domain + '&sz=128') : t.logo;
+      card.appendChild(logoTile('tool__logo', src, t.abbr, t.name));
+      card.appendChild(mk('span', 'tool__name', t.name));
+      tg.appendChild(card);
+    });
   })();
 
   /* ---------- Loading screen ---------- */
@@ -263,4 +290,48 @@
       apply();
     }
   }
+
+  /* ---------- Contact form (Web3Forms — no backend, lands in inbox) ---------- */
+  (function contactForm() {
+    const form = $('#contactForm');
+    if (!form) return;
+    const status = $('#cformStatus', form);
+    const btn = form.querySelector('button[type="submit"]');
+    const setStatus = (msg, type) => { if (status) { status.textContent = msg; status.dataset.state = type || ''; } };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      // honeypot — silently drop bots
+      if (form.querySelector('[name="botcheck"]').value) return;
+      const key = form.querySelector('[name="access_key"]').value;
+      if (!key || key === 'YOUR_WEB3FORMS_ACCESS_KEY') {
+        setStatus('Form not configured yet — add your Web3Forms access key.', 'err');
+        return;
+      }
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+
+      const original = btn.textContent;
+      btn.disabled = true; btn.textContent = 'Sending…';
+      setStatus('Sending your message…', '');
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(Object.fromEntries(new FormData(form)))
+        });
+        const data = await res.json();
+        if (res.ok && data.success) {
+          form.reset();
+          setStatus('Thanks — your message is in. I’ll reply within 24 hours.', 'ok');
+          btn.textContent = 'Sent ✓';
+          setTimeout(() => { btn.disabled = false; btn.textContent = original; }, 4000);
+        } else {
+          throw new Error(data.message || 'Submission failed');
+        }
+      } catch (err) {
+        setStatus('Something went wrong — please email work.abhishekgupta21@gmail.com directly.', 'err');
+        btn.disabled = false; btn.textContent = original;
+      }
+    });
+  })();
 })();
