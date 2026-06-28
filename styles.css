@@ -312,7 +312,9 @@ body.loaded .float-card{opacity:1;scale:1;animation-play-state:running;transitio
 .contact{padding-block:clamp(6rem,14vh,11rem)}
 .contact__inner{position:relative;text-align:center;display:flex;flex-direction:column;align-items:center;padding-block:clamp(3rem,7vw,5rem);border-radius:var(--radius);overflow:hidden;background:linear-gradient(170deg,rgba(17,19,27,.78),rgba(8,9,14,.85));backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
 .contact__inner::after{opacity:.4}
-.contact__glow{position:absolute;width:60%;height:140%;top:-40%;left:20%;background:radial-gradient(circle,rgba(129,140,248,.35),transparent 60%);filter:blur(40px)}
+.contact__glow{position:absolute;width:60%;height:140%;top:-40%;left:20%;background:radial-gradient(circle,rgba(129,140,248,.35),transparent 60%);filter:blur(40px);pointer-events:none;z-index:0}
+/* keep all contact content above the decorative glow so the form is fully clickable */
+.contact__inner > *:not(.contact__glow){position:relative;z-index:1}
 .contact>.container,.contact .kicker,.contact__title,.contact__bar,.contact__actions{position:relative;z-index:2}
 .contact__title{font-size:clamp(2.2rem,6vw,4.4rem);font-weight:600;letter-spacing:-.04em;line-height:1.02;margin-bottom:1.6rem}
 .contact__title em{font-family:var(--serif);font-style:italic;font-weight:400;background:var(--accent-text);-webkit-background-clip:text;background-clip:text;color:transparent}
