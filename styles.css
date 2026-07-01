@@ -7,7 +7,7 @@
 
 :root{
   /* "Studio" — warm, confident marketing palette (coral / magenta / amber) */
-  --bg:#0C0A0D;--bg-2:#161019;
+  --bg:#09080B;--bg-2:#141018;
   --ink:#F7F4F1;--ink-dim:rgba(247,244,241,.66);--ink-faint:rgba(247,244,241,.44);--ink-ghost:rgba(247,244,241,.14);
   --indigo:#FF6A3D;--violet:#FF4D85;--cyan:#FFB23E;--teal:#FF8A5B;--coral:#FF5C7A;--gold:#FFC24A;
   --glass:rgba(255,255,255,.045);--glass-2:rgba(255,255,255,.07);
@@ -43,15 +43,16 @@ img{display:block;max-width:100%}
 
 /* ===== Ambient field ===== */
 .field{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-.mesh{position:absolute;inset:-20%;opacity:.4;filter:blur(30px);
+/* restrained accent pooling on a clean deep-black canvas (crisp/premium, not a muddy wash) */
+.mesh{position:absolute;inset:-20%;opacity:.85;filter:blur(34px);
   background:
-    radial-gradient(40% 40% at 20% 30%,rgba(255,106,61,.28),transparent 70%),
-    radial-gradient(35% 45% at 80% 20%,rgba(255,77,133,.24),transparent 70%),
-    radial-gradient(45% 40% at 65% 80%,rgba(255,178,62,.2),transparent 70%),
-    radial-gradient(30% 30% at 10% 85%,rgba(251,113,133,.16),transparent 70%);
-  animation:meshShift 24s ease-in-out infinite alternate}
-@keyframes meshShift{to{transform:translate3d(3%,2%,0) scale(1.08)}}
-.aurora{position:absolute;border-radius:50%;filter:blur(80px);opacity:.3;mix-blend-mode:screen;will-change:transform}
+    radial-gradient(34% 40% at 14% 16%,rgba(255,106,61,.15),transparent 66%),
+    radial-gradient(30% 38% at 90% 82%,rgba(255,178,62,.10),transparent 70%);
+  animation:meshShift 26s ease-in-out infinite alternate}
+@keyframes meshShift{to{transform:translate3d(3%,2%,0) scale(1.06)}}
+/* vignette — darkens the edges for depth & focus (premium) */
+.field::after{content:"";position:absolute;inset:0;background:radial-gradient(130% 95% at 50% -5%,transparent 52%,rgba(0,0,0,.5) 100%)}
+.aurora{position:absolute;border-radius:50%;filter:blur(90px);opacity:.14;mix-blend-mode:screen;will-change:transform}
 .aurora--1{width:60vw;height:60vw;top:-24vw;left:-14vw;background:radial-gradient(circle at 30% 30%,rgba(255,106,61,.95),transparent 60%);animation:drift1 30s var(--ease) infinite alternate}
 .aurora--2{width:56vw;height:56vw;top:6vw;right:-20vw;background:radial-gradient(circle at 60% 40%,rgba(255,77,133,.85),transparent 60%);animation:drift2 36s var(--ease) infinite alternate}
 .aurora--3{width:52vw;height:52vw;bottom:-22vw;left:24vw;background:radial-gradient(circle at 50% 50%,rgba(255,178,62,.7),transparent 58%);animation:drift3 26s var(--ease) infinite alternate}
@@ -99,7 +100,7 @@ main,.nav,.scroll-progress,.footer,.dock{position:relative;z-index:1}
 .nav__links a{position:relative;padding:.45rem .8rem;border-radius:8px;font-size:.86rem;color:var(--ink-dim);transition:color .25s var(--ease)}
 .nav__links a::after{content:"";position:absolute;left:.8rem;right:.8rem;bottom:.28rem;height:1px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease)}
 .nav__links a:hover,.nav__links a.is-active{color:var(--ink)}
-.nav__links a.is-active::after{transform:scaleX(1)}
+.nav__links a:hover::after,.nav__links a.is-active::after{transform:scaleX(1)}
 
 /* ===== Buttons ===== */
 .btn{position:relative;display:inline-flex;align-items:center;gap:.5rem;padding:.72rem 1.25rem;border-radius:12px;font-size:.9rem;font-weight:500;letter-spacing:-.01em;cursor:pointer;overflow:hidden;transition:transform .25s var(--ease),box-shadow .3s var(--ease),border-color .3s var(--ease);will-change:transform}
@@ -116,7 +117,8 @@ main,.nav,.scroll-progress,.footer,.dock{position:relative;z-index:1}
 
 /* ===== Shared bits ===== */
 .section{padding-block:var(--section-y)}
-.kicker{font-family:var(--mono);font-size:.78rem;letter-spacing:.04em;color:var(--violet);margin-bottom:1.4rem;opacity:.9}
+.kicker{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--mono);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--indigo);margin-bottom:1.4rem;opacity:.95}
+.kicker::before{content:"";width:26px;height:1.5px;background:var(--accent);border-radius:2px}
 .section__head{margin-bottom:clamp(2.6rem,5vw,4rem);max-width:46rem}
 .section__title{font-size:clamp(1.9rem,4.4vw,3.2rem);font-weight:600;letter-spacing:-.03em;line-height:1.04}
 .eyebrow{display:inline-flex;align-items:center;gap:.55rem;font-family:var(--mono);font-size:.8rem;color:var(--ink-dim);letter-spacing:.02em}
@@ -131,7 +133,8 @@ main,.nav,.scroll-progress,.footer,.dock{position:relative;z-index:1}
 .hero .eyebrow{margin-bottom:1.7rem}
 .hero__title{font-size:clamp(2.4rem,4.7vw,4.1rem);font-weight:600;line-height:1.02;letter-spacing:-.045em;margin-bottom:1.6rem}
 .hero__title .line{display:block;overflow:hidden}
-.hero__title em{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.01em;background:var(--accent-text);-webkit-background-clip:text;background-clip:text;color:transparent;padding-right:.12em}
+.hero__title em{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.01em;background:var(--accent-text);background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;padding-right:.12em;animation:accentShift 7s ease-in-out infinite}
+@keyframes accentShift{0%,100%{background-position:0% center}50%{background-position:100% center}}
 .hero__lede{font-size:clamp(1.02rem,1.5vw,1.18rem);color:var(--ink-dim);line-height:1.65;margin-bottom:2rem}
 .hero__lede strong{color:var(--ink);font-weight:600}
 

@@ -94,7 +94,8 @@
     ];
     const tg = $('[data-grid="tools"]');
     if (tg) TOOLS.forEach((t, i) => {
-      const card = mk('div', 'tool'); card.setAttribute('data-tilt', '');
+      const card = mk('div', 'tool reveal'); card.setAttribute('data-tilt', '');
+      card.setAttribute('data-reveal', ''); card.setAttribute('data-reveal-delay', String(i * 60));
       const src = t.domain ? ('https://www.google.com/s2/favicons?domain=' + t.domain + '&sz=128') : t.logo;
       card.appendChild(logoTile('tool__logo', src, t.abbr, t.name));
       card.appendChild(mk('span', 'tool__name', t.name));
