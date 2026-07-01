@@ -68,7 +68,7 @@
 
     // Section 2 — study abroad (slow marquee, 2 rows)
     const sg = $('[data-grid="study"]');
-    if (sg) buildMarquee(sg, PD.study, 2, 2.6, '');
+    if (sg) buildMarquee(sg, PD.study, 3, 2.6, '');
 
     // Section 3 — colleges: only the Top 20 on the homepage (bigger chips, 2 rows).
     // The full 307-college list lives on the dedicated /colleges page.
