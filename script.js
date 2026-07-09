@@ -292,47 +292,4 @@
     }
   }
 
-  /* ---------- Contact form (Web3Forms — no backend, lands in inbox) ---------- */
-  (function contactForm() {
-    const form = $('#contactForm');
-    if (!form) return;
-    const status = $('#cformStatus', form);
-    const btn = form.querySelector('button[type="submit"]');
-    const setStatus = (msg, type) => { if (status) { status.textContent = msg; status.dataset.state = type || ''; } };
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      // honeypot — silently drop bots
-      if (form.querySelector('[name="botcheck"]').value) return;
-      const key = form.querySelector('[name="access_key"]').value;
-      if (!key || key === 'YOUR_WEB3FORMS_ACCESS_KEY') {
-        setStatus('Form not configured yet — add your Web3Forms access key.', 'err');
-        return;
-      }
-      if (!form.checkValidity()) { form.reportValidity(); return; }
-
-      const original = btn.textContent;
-      btn.disabled = true; btn.textContent = 'Sending…';
-      setStatus('Sending your message…', '');
-      try {
-        const res = await fetch('https://api.web3forms.com/submit', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify(Object.fromEntries(new FormData(form)))
-        });
-        const data = await res.json();
-        if (res.ok && data.success) {
-          form.reset();
-          setStatus('Thanks — your message is in. I’ll reply within 24 hours.', 'ok');
-          btn.textContent = 'Sent ✓';
-          setTimeout(() => { btn.disabled = false; btn.textContent = original; }, 4000);
-        } else {
-          throw new Error(data.message || 'Submission failed');
-        }
-      } catch (err) {
-        setStatus('Something went wrong — please email work.abhishekgupta21@gmail.com directly.', 'err');
-        btn.disabled = false; btn.textContent = original;
-      }
-    });
-  })();
 })();
