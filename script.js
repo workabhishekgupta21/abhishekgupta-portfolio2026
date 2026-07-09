@@ -67,8 +67,10 @@
     if (cg) buildMarquee(cg, PD.clients, 1, 3.6, '', clientCard);
 
     // Section 2 — study abroad (slow marquee, 2 rows)
+    // Homepage: only the study clients with a real logo (full 120+ list lives on /study-abroad).
     const sg = $('[data-grid="study"]');
-    if (sg) buildMarquee(sg, PD.study, 3, 2.6, '');
+    const studyTop = (PD.studyTop && PD.studyTop.length) ? PD.studyTop : PD.study.filter((c) => c.logo);
+    if (sg) buildMarquee(sg, studyTop, 2, 3.0, ' lchip--lg');
 
     // Section 3 — colleges: only the Top 20 on the homepage (bigger chips, 2 rows).
     // The full 307-college list lives on the dedicated /colleges page.

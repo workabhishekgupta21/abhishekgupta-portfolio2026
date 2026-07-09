@@ -162,7 +162,7 @@ main,.nav,.scroll-progress,.footer,.dock{position:relative;z-index:1}
 .hero__cta{display:flex;flex-wrap:wrap;gap:.9rem}
 
 /* hero portrait + floating cards */
-.hero__portrait{position:relative;justify-self:center;width:min(100%,370px);aspect-ratio:1}
+.hero__portrait{position:relative;z-index:41;justify-self:center;width:min(100%,370px);aspect-ratio:1}
 .portrait{width:100%;height:100%;border-radius:50%;transition:transform .4s var(--ease)}
 .portrait::before{padding:2px}
 .portrait__img{position:relative;width:100%;height:100%;border-radius:50%;overflow:hidden;background:#0c0e15}
