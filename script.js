@@ -210,21 +210,26 @@
     });
   }
 
-  /* ---------- Cursor-follow glow ---------- */
+  /* ---------- Cursor-follow glow + precision dot ---------- */
   if (!reduce && fine) {
     const glow = $('#cursorGlow');
+    const dot = document.createElement('div');
+    dot.className = 'cursor-dot'; dot.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(dot);
     let gx = 0, gy = 0, cx = 0, cy = 0, raf;
     window.addEventListener('pointermove', (e) => {
       gx = e.clientX; gy = e.clientY;
-      glow.classList.add('is-on');
+      glow.classList.add('is-on'); dot.classList.add('is-on');
+      dot.classList.toggle('is-link', !!(e.target.closest && e.target.closest('a,button,.lchip,.client-card,.tool,.team,.cap,.cstudy')));
       if (!raf) raf = requestAnimationFrame(loop);
     }, { passive: true });
     function loop() {
       cx += (gx - cx) * .15; cy += (gy - cy) * .15;
       glow.style.transform = `translate(${cx}px,${cy}px) translate(-50%,-50%)`;
+      dot.style.transform = `translate(${gx}px,${gy}px) translate(-50%,-50%)`;
       raf = (Math.abs(gx - cx) > .5 || Math.abs(gy - cy) > .5) ? requestAnimationFrame(loop) : null;
     }
-    document.addEventListener('pointerleave', () => glow.classList.remove('is-on'));
+    document.addEventListener('pointerleave', () => { glow.classList.remove('is-on'); dot.classList.remove('is-on'); });
   }
 
   /* ---------- Nav + progress + scrollspy + dock ---------- */
@@ -292,4 +297,29 @@
     }
   }
 
+  /* ---------- Hero pointer parallax (award-style depth on mouse move) ----------
+     Drives the CSS `translate` property with a lerp so it composes with the
+     reveal/float `transform` animations instead of fighting them. */
+  if (!reduce && fine) {
+    const hero = $('.hero');
+    const portrait = $('.hero__portrait');
+    const fcards = $$('.hero__portrait .float-card');
+    if (hero && portrait) {
+      let tx = 0, ty = 0, x = 0, y = 0, raf2 = null;
+      hero.addEventListener('pointermove', (e) => {
+        const r = hero.getBoundingClientRect();
+        tx = ((e.clientX - r.left) / r.width - .5);
+        ty = ((e.clientY - r.top) / r.height - .5);
+        if (!raf2) raf2 = requestAnimationFrame(step);
+      }, { passive: true });
+      hero.addEventListener('pointerleave', () => { tx = 0; ty = 0; if (!raf2) raf2 = requestAnimationFrame(step); });
+      function step() {
+        x += (tx - x) * .07; y += (ty - y) * .07;
+        portrait.style.translate = `${x * -16}px ${y * -12}px`;
+        // compose with the scroll-parallax --py these cards already use
+        fcards.forEach((c, i) => { const d = [26, 34, 20][i] || 24; c.style.translate = `${x * d}px calc(${y * d * .7}px + var(--py, 0px))`; });
+        raf2 = (Math.abs(tx - x) > .001 || Math.abs(ty - y) > .001) ? requestAnimationFrame(step) : null;
+      }
+    }
+  }
 })();
