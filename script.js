@@ -110,18 +110,18 @@
   (function bubbles() {
     const sec = document.getElementById('contact');
     if (!sec) return;
-    // [logo, left%, top%, size(px), duration(s), hot]
+    // [logo, left%, top%, size(px), duration(s), hot] — only clean high-res logos (no pixelated favicons / odd single-mark icons)
     const B = [
-      ['assets/logos/study/leverage-edu.webp', 5, 12, 86, 9.5],
-      ['assets/logos/study/edvoy.webp', 14, 52, 60, 8],
-      ['assets/logos/study/aecc-india.webp', 6, 80, 74, 11],
-      ['assets/logos/study/tc-global.webp', 26, 7, 56, 7.5],
-      ['assets/logos/makunai.webp', 66, 5, 52, 10],
-      ['assets/logos/study/santamonica-study-abroad.webp', 88, 12, 78, 9],
-      ['assets/logos/study/si-uk.webp', 91, 66, 88, 10.5, true],
-      ['assets/logos/study/global-tree-careers.webp', 95, 40, 60, 8.5],
-      ['assets/logos/collegehai.webp', 30, 88, 64, 9.8],
-      ['assets/logos/study/unischolarz.webp', 71, 89, 58, 7.8],
+      ['assets/logos/collegehai.webp', 5, 12, 84, 9.5],
+      ['assets/logos/study/aecc-india.webp', 14, 52, 60, 8],
+      ['assets/logos/study/fragomen-educational-services.webp', 6, 80, 72, 11],
+      ['assets/logos/study/global-reach-education-services.webp', 26, 7, 56, 7.5],
+      ['assets/logos/study/satguru-overseas-education.webp', 66, 5, 54, 10],
+      ['assets/logos/study/shuraa-education.webp', 88, 12, 76, 9],
+      ['assets/logos/study/scholarshipkart-technologies.webp', 91, 66, 84, 10.5, true],
+      ['assets/logos/study/rus-education.webp', 95, 40, 58, 8.5],
+      ['assets/logos/study/thirdwave-overseas-education.webp', 30, 88, 62, 9.8],
+      ['assets/logos/study/metaapply.webp', 71, 89, 56, 7.8],
     ];
     const field = document.createElement('div');
     field.className = 'bubble-field'; field.setAttribute('aria-hidden', 'true');
