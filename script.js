@@ -103,6 +103,40 @@
     });
   })();
 
+  /* ---------- Floating client-logo bubbles around the contact CTA ----------
+     (Bynetic-style: real client logos drifting in white circles) ---------- */
+  (function bubbles() {
+    const sec = document.getElementById('contact');
+    if (!sec) return;
+    // [logo, left%, top%, size(px), duration(s), hot]
+    const B = [
+      ['assets/logos/study/leverage-edu.webp', 5, 12, 86, 9.5],
+      ['assets/logos/study/edvoy.webp', 14, 52, 60, 8],
+      ['assets/logos/study/aecc-india.webp', 6, 80, 74, 11],
+      ['assets/logos/study/tc-global.webp', 26, 7, 56, 7.5],
+      ['assets/logos/makunai.webp', 66, 5, 52, 10],
+      ['assets/logos/study/santamonica-study-abroad.webp', 88, 12, 78, 9],
+      ['assets/logos/study/si-uk.webp', 91, 66, 88, 10.5, true],
+      ['assets/logos/study/global-tree-careers.webp', 95, 40, 60, 8.5],
+      ['assets/logos/collegehai.webp', 30, 88, 64, 9.8],
+      ['assets/logos/study/unischolarz.webp', 71, 89, 58, 7.8],
+    ];
+    const field = document.createElement('div');
+    field.className = 'bubble-field'; field.setAttribute('aria-hidden', 'true');
+    B.forEach((b, i) => {
+      const el = document.createElement('span');
+      el.className = 'bubble' + (b[5] ? ' bubble--hot' : '');
+      el.style.cssText = `left:${b[1]}%;top:${b[2]}%;width:${b[3]}px;height:${b[3]}px;--fd:${b[4]}s;--fdel:${-(i * 1.3)}s`;
+      el.setAttribute('data-reveal', ''); el.setAttribute('data-reveal-delay', String(i * 90));
+      const img = new Image();
+      img.src = b[0]; img.alt = ''; img.loading = 'lazy'; img.decoding = 'async';
+      img.onerror = () => el.remove();
+      el.appendChild(img);
+      field.appendChild(el);
+    });
+    sec.prepend(field);
+  })();
+
   /* ---------- Loading screen ---------- */
   (function loader() {
     const el = $('#loader'), bar = $('#loaderBar'), pct = $('#loaderPct');
