@@ -116,10 +116,9 @@
       ['assets/logos/study/aecc-india.webp', 14, 52, 60, 8],
       ['assets/logos/study/fragomen-educational-services.webp', 6, 80, 72, 11],
       ['assets/logos/study/global-reach-education-services.webp', 26, 7, 56, 7.5],
-      ['assets/logos/study/satguru-overseas-education.webp', 66, 5, 54, 10],
+      ['assets/logos/study/satguru-overseas-education.webp', 66, 5, 54, 10, true],
       ['assets/logos/study/shuraa-education.webp', 88, 12, 76, 9],
-      ['assets/logos/study/scholarshipkart-technologies.webp', 91, 66, 84, 10.5, true],
-      ['assets/logos/study/rus-education.webp', 95, 40, 58, 8.5],
+      ['assets/logos/study/rus-education.webp', 93, 62, 58, 8.5],
       ['assets/logos/study/thirdwave-overseas-education.webp', 30, 88, 62, 9.8],
       ['assets/logos/study/metaapply.webp', 71, 89, 56, 7.8],
     ];
